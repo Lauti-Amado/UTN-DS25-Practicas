@@ -1,0 +1,47 @@
+h1 {
+    background: blue;
+    color: white;
+    text-align: center;
+    content: normal;
+    padding: 10px;
+    margin:10px;
+    border-radius: 5px;
+    font-family: Georgia, serif;
+}
+
+h4 {
+    background: lightblue;
+    color: black;
+    text-align: left;
+    content: normal;
+    padding: 10px;
+    margin:10px;
+    border-radius: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, serif;
+
+}
+p {
+    background: lightgrey;
+    color: black;
+    text-align: left;
+    content: normal;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-family: 'calibri', 'Arial Narrow', Arial, sans-serif, serif;
+}
+
+a {
+    color:rgb(115, 9, 214);
+    font-style: italic;
+    font-size: large;
+    text-shadow: cyan 1px 1px 2px;
+    text-align: left;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+body {
+    background-color:aliceblue;
+}

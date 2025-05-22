@@ -1,0 +1,75 @@
+body {
+    text-align: center;
+    background-color: #f0f0f0; /* Color de fondo */
+    margin: 0;
+    padding: 0;
+}
+
+#contenedor {
+ font-family: Arial, sans-serif;
+}
+
+#contenedor #cabecera #logo {
+    width: 150px;
+    height: 150px; 
+    position: absolute;
+    left: 20px;
+    top: 25px;
+}
+
+#cabecera {
+    height: 200px;
+    background-image: url("./imagenes/logotipo-libreria-dibujado-mano_23-2149331221.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+#cabecera h1 {
+    margin: 0;
+    line-height: 200px;
+    font-size: 2em;
+    color: white;
+}
+
+#menu {
+margin: auto;
+display: block;
+flex-direction: column;
+width: 15%;
+align-items: center;
+}
+
+#pie {
+clear: both;
+background-color: rgb(228, 227, 227);
+height: 35px;
+width: 100;
+position: flex;
+margin:auto;
+padding: 0;
+}
+
+#redes-sociales {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(201, 238, 250); /* Color de fondo */;
+    position: flex;
+    align-items: center; /* Centra verticalmente */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+#pie p  {
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    line-height: 50px; /* Centra verticalmente el texto */
+    background-color: rgb(201, 238, 250);
+}
+
+.lightblue {
+    background-color: rgb(201, 238, 250);
+}

@@ -1,0 +1,30 @@
+h1 {
+    background: mediumslateblue;
+    font: 15.5/ .6 georgia;
+    color: whitesmoke;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px;
+}
+
+h4 {
+    background: mediumslateblue;
+    color: whitesmoke;
+    font: 14/ .6 georgia;
+    text-align: left;
+    font-weight: bold;
+    padding: 12px;
+}
+
+p {
+    color: black;
+    margin: 3px;
+    font: 12/ .6 arial;
+}
+
+a {
+    color: crimson;
+    margin: 3px;
+    font: 12/ .6 Arial;
+    font-weight: lighter;
+}

@@ -1,0 +1,34 @@
+
+#dosfila #dosportres  {
+    background-color: lightblue;
+}
+
+#dosfila td {
+    background-color: violet;
+}
+
+td {
+    background-color:beige
+}
+
+.trescolum {
+    background-color: red;
+}
+
+.pyu {
+    background-color: yellow;
+}
+
+#trespordos {
+    background-color: pink;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 10px solid black;
+    padding: 75px;
+}
