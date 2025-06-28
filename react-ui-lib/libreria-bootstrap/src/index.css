@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background-color: #f0f0f0; /* Color de fondo */
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
@@ -19,7 +19,7 @@ body {
 
 #cabecera {
     height: 200px;
-    background-image: url("../../Ejercicio5/imagenes/logotipo-libreria-dibujado-mano_23-2149331221.avif");
+    background-image: url("/public/img/logotipo-libreria.avif");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,11 +54,11 @@ padding: 0;
 #redes-sociales {
     width: 100%;
     height: 50px;
-    background-color: rgb(201, 238, 250); /* Color de fondo */;
+    background-color: rgb(201, 238, 250);
     position: flex;
-    align-items: center; /* Centra verticalmente */
+    align-items: center;
     border: none;
-    border-radius: 5px; /* Bordes redondeados */
+    border-radius: 5px;
 }
 
 #pie p  {
@@ -66,7 +66,7 @@ padding: 0;
     height: 50px;
     margin: 0;
     padding: 0;
-    line-height: 50px; /* Centra verticalmente el texto */
+    line-height: 50px;
     background-color: rgb(201, 238, 250);
 }
 
