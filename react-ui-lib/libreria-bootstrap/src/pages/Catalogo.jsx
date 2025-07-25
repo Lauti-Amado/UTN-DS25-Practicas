@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import LibroDestacado from '../components/LibroDestacado';
+import { LibroContext } from '../components/LibroContext';
 
-const Catalogo = ({ catalogo }) => {
+const Catalogo = () => {
+  const { libros } = useContext(LibroContext);
   const [busqueda, setBusqueda] = useState('');
 
-  const filtrados = catalogo.filter(libro =>
+  const filtrados = libros.filter(libro =>
     libro.titulo.toLowerCase().includes(busqueda.toLowerCase())
   );
 
@@ -18,8 +20,8 @@ const Catalogo = ({ catalogo }) => {
         onChange={(e) => setBusqueda(e.target.value)}
       />
       <div className="row">
-        {filtrados.map((libro, i) => (
-          <div key={i} className="col-md-4">
+        {filtrados.map((libro) => (
+          <div key={libro.id} className="col-md-4">
             <LibroDestacado {...libro} />
           </div>
         ))}
