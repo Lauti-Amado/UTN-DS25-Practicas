@@ -28,11 +28,12 @@ const Menu = () => {
             <p>Cargando libros...</p>
           ) : (
             <div className="row">
-              {librosFiltrados.map((libro) => (
-                <div key={libro.id} className="col-sm-6 col-lg-4 mb-4">
-                  <LibroDestacado {...libro} />
-                </div>
-              ))}
+              {Array.isArray(librosFiltrados) &&
+                librosFiltrados.map((libro) => (
+                  <div key={libro.id} className="col-sm-6 col-lg-4 mb-4">
+                    <LibroDestacado {...libro} />
+                  </div>
+                ))}
               {librosFiltrados.length === 0 && (
                 <p className="text-center">No hay libros para mostrar.</p>
               )}

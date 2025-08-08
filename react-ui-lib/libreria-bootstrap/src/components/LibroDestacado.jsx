@@ -1,6 +1,19 @@
 import React from 'react';
 
 const LibroDestacado = ({ titulo, autor, imagenSrc }) => {
+  if (
+    typeof titulo !== 'string' ||
+    typeof autor !== 'string' ||
+    typeof imagenSrc !== 'string'
+  ) {
+    console.warn('❌ Datos inválidos recibidos en LibroDestacado:', {
+      titulo,
+      autor,
+      imagenSrc
+    });
+    return null;
+  }
+
   return (
     <div className="card mb-3" style={{ maxWidth: '18rem' }}>
       <img src={imagenSrc} className="card-img-top" alt={`Tapa de ${titulo}`} />
@@ -13,4 +26,3 @@ const LibroDestacado = ({ titulo, autor, imagenSrc }) => {
 };
 
 export default LibroDestacado;
-

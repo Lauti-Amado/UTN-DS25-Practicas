@@ -1,31 +1,37 @@
 import React, { createContext, useState, useEffect } from 'react';
-import useFetchLibros from './FetchLibros'; // <- corregido
+import useFetchLibros from './FetchLibros';
 
 export const LibroContext = createContext();
 
 export const LibroProvider = ({ children }) => {
-  const { librosIniciales, cargando } = useFetchLibros();
-  const [libros, setLibros] = useState(() => {
-    const guardados = localStorage.getItem('libros');
-    return guardados ? JSON.parse(guardados) : [];
-  });
+  const { librosIniciales, cargando, error } = useFetchLibros();
+  const [libros, setLibros] = useState([]);
 
   useEffect(() => {
-    if (librosIniciales.length > 0 && libros.length === 0) {
-      setLibros(librosIniciales);
-    }
+    setLibros(librosIniciales); // Siempre que cambia, los carga
   }, [librosIniciales]);
 
-  useEffect(() => {
-    localStorage.setItem('libros', JSON.stringify(libros));
-  }, [libros]);
-
   const agregarLibro = (nuevoLibro) => {
-    setLibros((prev) => [...prev, { ...nuevoLibro, id: prev.length + 1 }]);
+    fetch('http://localhost:3000/api/books', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevoLibro),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Error al guardar el libro');
+        return res.json();
+      })
+      .then((libroAgregado) => {
+        console.log('✅ Libro agregado:', libroAgregado);
+        setLibros((prev) => [...prev, libroAgregado]);
+      })
+      .catch((err) => console.error('❌ Error al agregar libro:', err));
   };
 
   return (
-    <LibroContext.Provider value={{ libros, agregarLibro, cargando }}>
+    <LibroContext.Provider value={{ libros, agregarLibro, cargando, error }}>
       {children}
     </LibroContext.Provider>
   );
