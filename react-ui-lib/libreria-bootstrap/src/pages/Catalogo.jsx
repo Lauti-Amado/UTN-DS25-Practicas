@@ -7,7 +7,7 @@ const Catalogo = () => {
   const [busqueda, setBusqueda] = useState('');
 
   const filtrados = libros.filter(libro =>
-    libro.titulo.toLowerCase().includes(busqueda.toLowerCase())
+    libro.title.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (

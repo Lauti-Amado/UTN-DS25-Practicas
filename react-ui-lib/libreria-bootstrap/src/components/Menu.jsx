@@ -10,7 +10,7 @@ const Menu = () => {
   const [busqueda, setBusqueda] = React.useState('');
 
   const librosFiltrados = libros.filter((libro) =>
-    libro.titulo.toLowerCase().includes(busqueda.toLowerCase())
+    libro.title.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   if (cargando) return <Spinner />;
@@ -20,7 +20,7 @@ const Menu = () => {
       <div className="row">
         <div className="col-md-3">
           <Buscador busqueda={busqueda} setBusqueda={setBusqueda} />
-          <FormularioAgregarLibro agregarLibro={agregarLibro} />
+          <FormularioAgregarLibro />
         </div>
 
         <div className="col-md-9">
