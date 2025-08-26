@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
 import { LibroContext } from "./LibroContext";
-import useFetchAutores from "../hooks/useFetchAutores"; // 👈 hook que trae autores
 
-const FormularioAgregarLibro = () => {
+const FormularioAgregarLibro = ({ autores, cargandoAutores }) => {
   const { agregarLibro } = useContext(LibroContext);
-  const { autores, refetch } = useFetchAutores();
   const [titulo, setTitulo] = useState("");
-  const [autorId, setAutorId] = useState(""); // 👈 guarda ID seleccionado (string)
+  const [autorId, setAutorId] = useState("");
   const [precio, setPrecio] = useState("");
   const [mensaje, setMensaje] = useState(null);
   const [tipoMensaje, setTipoMensaje] = useState("success");
@@ -16,8 +14,8 @@ const FormularioAgregarLibro = () => {
     if (titulo.trim() && autorId && precio.trim()) {
       const nuevoLibro = {
         title: titulo,
-        authorId: Number(autorId), 
-        price: Number(precio),     
+        authorId: Number(autorId),
+        price: Number(precio),
         imageUrl: "/img/placeholder.jpg",
       };
 
@@ -28,7 +26,6 @@ const FormularioAgregarLibro = () => {
         setTitulo("");
         setAutorId("");
         setPrecio("");
-        refetch(); 
       } catch (error) {
         setMensaje("❌ Error al agregar el libro.");
         setTipoMensaje("danger");
@@ -62,6 +59,7 @@ const FormularioAgregarLibro = () => {
           className="form-control mb-2"
           value={autorId}
           onChange={(e) => setAutorId(e.target.value)}
+          disabled={cargandoAutores}
         >
           <option value="">Selecciona un autor</option>
           {autores.map((autor) => (

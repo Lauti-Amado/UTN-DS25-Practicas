@@ -30,7 +30,6 @@ export const LibroProvider = ({ children }) => {
       })
       .then((libroAgregado) => {
         console.log('✅ Libro agregado:', libroAgregado);
-        // ✅ recargamos toda la lista desde el back
         refetch();
       })
       .catch((err) => {

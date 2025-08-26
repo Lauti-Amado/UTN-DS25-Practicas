@@ -5,18 +5,22 @@ const useFetchAutores = () => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchAutores = async () => {
-    try {
-      const res = await fetch("http://localhost:3000/api/authors");
-      if (!res.ok) throw new Error("Error al obtener autores");
-      const data = await res.json();
-      setAutores(data);
-      setCargando(false);
-    } catch (err) {
-      console.error("❌ Error al obtener autores:", err);
-      setError(err.message);
-      setCargando(false);
-    }
+  const fetchAutores = () => {
+    setCargando(true);
+    fetch("http://localhost:3000/api/authors")
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al obtener autores");
+        return res.json();
+      })
+      .then((data) => {
+        setAutores(data);
+        setCargando(false);
+      })
+      .catch((error) => {
+        console.error("❌ Error al obtener autores:", error);
+        setError(error.message);
+        setCargando(false);
+      });
   };
 
   useEffect(() => {
