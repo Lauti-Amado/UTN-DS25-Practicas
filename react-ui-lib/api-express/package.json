@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "node dist/app.js",
+    "seed": "ts-node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "@prisma/client": "^6.14.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "supabase": "^2.34.3"
+    "supabase": "^2.34.3",
+    "zod": "^4.1.1"
   }
 }

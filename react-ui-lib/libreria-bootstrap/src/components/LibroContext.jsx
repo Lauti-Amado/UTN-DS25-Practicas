@@ -4,34 +4,40 @@ import useFetchLibros from './FetchLibros';
 export const LibroContext = createContext();
 
 export const LibroProvider = ({ children }) => {
-  const { librosIniciales, cargando, error } = useFetchLibros();
+  const { librosIniciales, cargando, error, refetch } = useFetchLibros();
   const [libros, setLibros] = useState([]);
 
   useEffect(() => {
     setLibros(librosIniciales);
   }, [librosIniciales]);
 
-const agregarLibro = (nuevoLibro) => {
-  fetch('http://localhost:3000/api/books', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      title: nuevoLibro.title,
-      author: nuevoLibro.author,
-      price: nuevoLibro.price,
-      imageUrl: nuevoLibro.imageUrl || '/img/placeholder.jpg',
-    }),
-  })
-    .then((res) => {
-      if (!res.ok) throw new Error('Error al guardar el libro');
-      return res.json();
+  const agregarLibro = (nuevoLibro) => {
+    fetch('http://localhost:3000/api/books', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(nuevoLibro),
     })
-    .then((libroAgregado) => {
-      console.log('✅ Libro agregado:', libroAgregado);
-      setLibros((prev) => [...prev, libroAgregado]);
-    })
-    .catch((err) => console.error('❌ Error al agregar libro:', err));
-};
+      .then(async (res) => {
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(
+            errorData.errors?.map((e) => e.message).join(', ') ||
+              errorData.message ||
+              'Error al guardar el libro'
+          );
+        }
+        return res.json();
+      })
+      .then((libroAgregado) => {
+        console.log('✅ Libro agregado:', libroAgregado);
+        // ✅ recargamos toda la lista desde el back
+        refetch();
+      })
+      .catch((err) => {
+        console.error('❌ Error al agregar libro:', err);
+        alert(err.message);
+      });
+  };
 
   return (
     <LibroContext.Provider value={{ libros, agregarLibro, cargando, error }}>

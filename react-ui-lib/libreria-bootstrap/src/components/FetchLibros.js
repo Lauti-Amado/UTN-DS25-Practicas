@@ -5,7 +5,8 @@ const useFetchLibros = () => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const fetchLibros = () => {
+    setCargando(true);
     fetch('http://localhost:3000/api/books')
       .then((res) => {
         if (!res.ok) throw new Error('Error al obtener libros');
@@ -20,9 +21,13 @@ const useFetchLibros = () => {
         setError(error.message);
         setCargando(false);
       });
+  };
+
+  useEffect(() => {
+    fetchLibros();
   }, []);
 
-  return { librosIniciales, cargando, error };
+  return { librosIniciales, cargando, error, refetch: fetchLibros };
 };
 
 export default useFetchLibros;

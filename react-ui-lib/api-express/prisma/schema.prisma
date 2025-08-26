@@ -25,11 +25,18 @@ model Post {
   authorId Int
 }
 
+model Author {
+  id    Int    @id @default(autoincrement())
+  name  String
+  books Book[]
+}
+
 model Book {
   id        Int      @id @default(autoincrement())
   title     String
-  author    String
   price     Int
   imageUrl  String   @default("/img/placeholder.jpg")
   createdAt DateTime @default(now())
+  authorId  Int
+  author    Author   @relation(fields: [authorId], references: [id])
 }
