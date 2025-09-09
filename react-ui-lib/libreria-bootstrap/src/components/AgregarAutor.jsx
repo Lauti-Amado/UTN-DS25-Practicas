@@ -27,7 +27,7 @@ const FormularioAgregarAutor = ({ onAutorAgregado }) => {
       setTipoMensaje("success");
       setNombre("");
 
-      if (onAutorAgregado) onAutorAgregado(); 
+      if (onAutorAgregado) onAutorAgregado();
     } catch (error) {
       console.error("❌ Error:", error);
       setMensaje("❌ Error al agregar el autor.");
@@ -36,9 +36,9 @@ const FormularioAgregarAutor = ({ onAutorAgregado }) => {
   };
 
   return (
-    <div className="mt-4">
-      <form onSubmit={manejarSubmit}>
-        <h5>Agregar nuevo autor</h5>
+    <div className="card shadow-sm mt-4">
+      <div className="card-body">
+        <h5 className="card-title">✍️ Agregar nuevo autor</h5>
 
         {mensaje && (
           <div className={`alert alert-${tipoMensaje}`} role="alert">
@@ -46,18 +46,20 @@ const FormularioAgregarAutor = ({ onAutorAgregado }) => {
           </div>
         )}
 
-        <input
-          type="text"
-          className="form-control mb-2"
-          placeholder="Nombre del autor"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />
+        <form onSubmit={manejarSubmit}>
+          <input
+            type="text"
+            className="form-control mb-3"
+            placeholder="Nombre del autor"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
 
-        <button type="submit" className="btn btn-secondary w-100">
-          Agregar Autor
-        </button>
-      </form>
+          <button type="submit" className="btn btn-secondary w-100">
+            Agregar Autor
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

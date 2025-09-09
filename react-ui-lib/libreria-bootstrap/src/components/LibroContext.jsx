@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import useFetchLibros from './FetchLibros';
+import { getToken } from '../helpers/auth';
 
 export const LibroContext = createContext();
 
@@ -12,9 +13,13 @@ export const LibroProvider = ({ children }) => {
   }, [librosIniciales]);
 
   const agregarLibro = (nuevoLibro) => {
+    const token = getToken();
     fetch('http://localhost:3000/api/books', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
       body: JSON.stringify(nuevoLibro),
     })
       .then(async (res) => {
@@ -28,8 +33,7 @@ export const LibroProvider = ({ children }) => {
         }
         return res.json();
       })
-      .then((libroAgregado) => {
-        console.log('✅ Libro agregado:', libroAgregado);
+      .then(() => {
         refetch();
       })
       .catch((err) => {

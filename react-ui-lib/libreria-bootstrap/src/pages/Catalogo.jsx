@@ -1,31 +1,62 @@
-import React, { useContext, useState } from 'react';
-import LibroDestacado from '../components/LibroDestacado';
-import { LibroContext } from '../components/LibroContext';
+import React, { useState } from 'react';
+import { getToken, setToken } from '../helpers/auth';
+import Menu from '../components/Menu';
 
 const Catalogo = () => {
-  const { libros } = useContext(LibroContext);
-  const [busqueda, setBusqueda] = useState('');
+  const token = getToken();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const filtrados = libros.filter(libro =>
-    libro.title.toLowerCase().includes(busqueda.toLowerCase())
-  );
+  async function handleLogin(e) {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      if (!res.ok) throw new Error("Error en login");
+      const { data } = await res.json();
+      setToken(data.token);
+      window.location.reload(); // fuerza re-render con token
+    } catch {
+      alert("❌ Login fallido");
+    }
+  }
+
+  if (!token) {
+    return (
+      <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "70vh" }}>
+        <div className="card p-4 shadow" style={{ maxWidth: "400px", width: "100%" }}>
+          <h2 className="text-center mb-3">🔑 Iniciar Sesión</h2>
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              className="form-control mb-3"
+              placeholder="Email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              className="form-control mb-3"
+              placeholder="Contraseña"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <button type="submit" className="btn btn-primary w-100">
+              Ingresar
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mt-4">
-      <input
-        type="text"
-        className="form-control mb-3"
-        placeholder="Buscar por título..."
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-      />
-      <div className="row">
-        {filtrados.map((libro) => (
-          <div key={libro.id} className="col-md-4">
-            <LibroDestacado {...libro} />
-          </div>
-        ))}
-      </div>
+      <h2>🔐 Catálogo Seguro</h2>
+      <Menu />
     </div>
   );
 };

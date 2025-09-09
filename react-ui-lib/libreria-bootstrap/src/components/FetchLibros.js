@@ -7,7 +7,7 @@ const useFetchLibros = () => {
 
   const fetchLibros = () => {
     setCargando(true);
-    fetch('http://localhost:3000/api/books')
+    fetch('http://localhost:3000/api/books/public')
       .then((res) => {
         if (!res.ok) throw new Error('Error al obtener libros');
         return res.json();

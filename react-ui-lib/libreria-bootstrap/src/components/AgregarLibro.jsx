@@ -37,9 +37,9 @@ const FormularioAgregarLibro = ({ autores, cargandoAutores }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={manejarSubmit} className="mt-4">
-        <h5>Agregar nuevo libro</h5>
+    <div className="card shadow-sm mt-4">
+      <div className="card-body">
+        <h5 className="card-title">📖 Agregar nuevo libro</h5>
 
         {mensaje && (
           <div className={`alert alert-${tipoMensaje}`} role="alert">
@@ -47,40 +47,42 @@ const FormularioAgregarLibro = ({ autores, cargandoAutores }) => {
           </div>
         )}
 
-        <input
-          type="text"
-          className="form-control mb-2"
-          placeholder="Título"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-        />
+        <form onSubmit={manejarSubmit}>
+          <input
+            type="text"
+            className="form-control mb-2"
+            placeholder="Título"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+          />
 
-        <select
-          className="form-control mb-2"
-          value={autorId}
-          onChange={(e) => setAutorId(e.target.value)}
-          disabled={cargandoAutores}
-        >
-          <option value="">Selecciona un autor</option>
-          {autores.map((autor) => (
-            <option key={autor.id} value={autor.id}>
-              {autor.name}
-            </option>
-          ))}
-        </select>
+          <select
+            className="form-control mb-2"
+            value={autorId}
+            onChange={(e) => setAutorId(e.target.value)}
+            disabled={cargandoAutores}
+          >
+            <option value="">Selecciona un autor</option>
+            {autores.map((autor) => (
+              <option key={autor.id} value={autor.id}>
+                {autor.name}
+              </option>
+            ))}
+          </select>
 
-        <input
-          type="number"
-          className="form-control mb-2"
-          placeholder="Precio"
-          value={precio}
-          onChange={(e) => setPrecio(e.target.value)}
-        />
+          <input
+            type="number"
+            className="form-control mb-3"
+            placeholder="Precio"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+          />
 
-        <button type="submit" className="btn btn-primary w-100">
-          Agregar
-        </button>
-      </form>
+          <button type="submit" className="btn btn-primary w-100">
+            Agregar
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
