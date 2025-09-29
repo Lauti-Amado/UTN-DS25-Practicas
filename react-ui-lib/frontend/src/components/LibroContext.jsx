@@ -37,7 +37,7 @@ export const LibroProvider = ({ children }) => {
         refetch();
       })
       .catch((err) => {
-        console.error('❌ Error al agregar libro:', err);
+        console.error('Error al agregar libro:', err);
         alert(err.message);
       });
   };

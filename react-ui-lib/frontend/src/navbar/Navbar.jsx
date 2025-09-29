@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { getToken, clearToken } from "../helpers/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const token = getToken();
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    clearToken();
-    window.location.href = "/";
+    logout();
+    navigate("/");
   };
 
   return (
@@ -29,13 +30,34 @@ const Navbar = () => {
               <Link className="nav-link" to="/catalogo-publico">Catálogo Público</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/catalogo">Catálogo Seguro</Link>
+              <Link className="nav-link" to="/contacto">📧 Contacto</Link>
             </li>
-            {token && (
+
+            {isAuthenticated && (
               <li className="nav-item">
-                <button className="btn btn-sm btn-light ms-2" onClick={handleLogout}>
-                  Cerrar Sesión
-                </button>
+                <Link className="nav-link" to="/catalogo">Catálogo Seguro</Link>
+              </li>
+            )}
+
+            {isAuthenticated ? (
+              <>
+                <li className="nav-item d-flex align-items-center ms-2 text-white">
+                  👤 {user?.email}
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="btn btn-sm btn-light ms-2"
+                    onClick={handleLogout}
+                  >
+                    Cerrar Sesión
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <Link className="btn btn-sm btn-light ms-2" to="/login">
+                  Iniciar Sesión
+                </Link>
               </li>
             )}
           </ul>

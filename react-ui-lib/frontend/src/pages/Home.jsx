@@ -18,6 +18,9 @@ const Home = () => {
           <Link to="/catalogo" className="btn btn-outline-warning btn-lg">
             Ver Catálogo (Requiere Login)
           </Link>
+          <Link to="/contacto" className="btn btn-outline-info btn-lg">
+            📧 Ir a Contacto
+          </Link>
         </div>
       </main>
     </div>

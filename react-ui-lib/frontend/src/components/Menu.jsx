@@ -36,7 +36,7 @@ const Menu = () => {
             <div className="row">
               {Array.isArray(librosFiltrados) &&
                 librosFiltrados.map((libro) => {
-                console.log("📖 Libro en render:", libro);
+                console.log("Libro en render:", libro);
                 return (
                   <div key={libro.id} className="col-sm-6 col-lg-4 mb-4">
                     <LibroDestacado {...libro} />

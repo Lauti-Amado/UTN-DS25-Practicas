@@ -17,7 +17,7 @@ const useFetchAutores = () => {
         setCargando(false);
       })
       .catch((error) => {
-        console.error("❌ Error al obtener autores:", error);
+        console.error("Error al obtener autores:", error);
         setError(error.message);
         setCargando(false);
       });
