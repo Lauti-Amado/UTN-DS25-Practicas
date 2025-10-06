@@ -33,3 +33,5 @@ Thumbs.db
 *.local.*
 
 /src/generated/prisma
+
+dist/
