@@ -31,7 +31,3 @@ Thumbs.db
 # Env and local config
 .env
 *.local.*
-
-/src/generated/prisma
-
-dist/
