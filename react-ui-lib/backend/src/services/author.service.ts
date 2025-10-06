@@ -1,5 +1,5 @@
 import prisma from '../config/prisma';
-import { Author } from '../generated/prisma';
+import { Author } from '@prisma/client';
 
 export async function getAllAuthors(): Promise<Author[]> {
   return prisma.author.findMany({
