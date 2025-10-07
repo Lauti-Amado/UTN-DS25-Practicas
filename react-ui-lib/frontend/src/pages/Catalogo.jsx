@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getToken, setToken } from '../helpers/auth';
 import Menu from '../components/Menu';
+import { API_URL } from '../config';
 
 const Catalogo = () => {
   const token = getToken();
@@ -10,7 +11,7 @@ const Catalogo = () => {
   async function handleLogin(e) {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/auth/login", {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

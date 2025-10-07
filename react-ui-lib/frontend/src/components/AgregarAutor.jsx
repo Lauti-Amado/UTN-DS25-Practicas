@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from '../config';
 
 const FormularioAgregarAutor = ({ onAutorAgregado }) => {
   const [nombre, setNombre] = useState("");
@@ -15,7 +16,7 @@ const FormularioAgregarAutor = ({ onAutorAgregado }) => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/authors", {
+      const res = await fetch(`${API_URL}/api/authors`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: nombre }),

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from '../config';
 
 const useFetchAutores = () => {
   const [autores, setAutores] = useState([]);
@@ -7,7 +8,7 @@ const useFetchAutores = () => {
 
   const fetchAutores = () => {
     setCargando(true);
-    fetch("http://localhost:3000/api/authors")
+    fetch(`${API_URL}/api/authors`)
       .then((res) => {
         if (!res.ok) throw new Error("Error al obtener autores");
         return res.json();

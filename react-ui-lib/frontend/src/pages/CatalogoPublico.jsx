@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import LibroDestacado from '../components/LibroDestacado';
 import { useFetch } from '../hooks/useFetch';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config';
 
 const CatalogoPublico = () => {
   const [busqueda, setBusqueda] = useState('');
-  const { data, loading, error } = useFetch('http://localhost:3000/api/books/public');
+  const { data, loading, error } = useFetch(`${API_URL}/api/books/public`);
 
   if (loading) return <p>Cargando...</p>;
   if (error) return <p>Error: {error.message}</p>;

@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { getToken, setToken, clearToken, parseJWT, getUserData, isTokenExpired } from "../helpers/auth";
+import { API_URL } from '../config';
 
 const AuthContext = createContext();
 
@@ -19,7 +20,7 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const res = await fetch("http://localhost:3000/api/auth/login", {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

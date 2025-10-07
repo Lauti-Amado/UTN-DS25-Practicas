@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 const useFetchLibros = () => {
   const [librosIniciales, setLibrosIniciales] = useState([]);
@@ -7,7 +8,7 @@ const useFetchLibros = () => {
 
   const fetchLibros = () => {
     setCargando(true);
-    fetch('http://localhost:3000/api/books/public')
+    fetch(`${API_URL}/api/books/public`)
       .then((res) => {
         if (!res.ok) throw new Error('Error al obtener libros');
         return res.json();

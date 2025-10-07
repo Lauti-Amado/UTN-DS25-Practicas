@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import useFetchLibros from './FetchLibros';
 import { getToken } from '../helpers/auth';
+import { API_URL } from '../config';
 
 export const LibroContext = createContext();
 
@@ -14,7 +15,7 @@ export const LibroProvider = ({ children }) => {
 
   const agregarLibro = (nuevoLibro) => {
     const token = getToken();
-    fetch('http://localhost:3000/api/books', {
+    fetch(`${API_URL}/api/books`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
