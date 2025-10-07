@@ -14,11 +14,25 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Lista de orígenes permitidos
+const allowedOrigins = [
+  'http://localhost:5173', // entorno local
+  'https://utn-ds-25-practicas-e88q.vercel.app' // deploy en Vercel
+];
+
+// Configuración dinámica de CORS
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin: string | undefined, callback: Function) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS bloqueado para origen no permitido: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
@@ -27,12 +41,12 @@ app.use(logRequest);
 
 // Rutas
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);   // Admin only
-app.use('/api/books', bookRoutes);   // pública (/public) + seguras
+app.use('/api/users', userRoutes);
+app.use('/api/books', bookRoutes);
 app.use('/api/authors', authorRoutes);
 app.use('/api/seed', seedRoutes);
 
-// Manejo de errores al final
+// Manejo de errores
 app.use(handleError);
 
 app.listen(PORT, () => {
