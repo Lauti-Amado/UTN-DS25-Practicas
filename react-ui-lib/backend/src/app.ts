@@ -14,22 +14,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Lista de orígenes permitidos
-const allowedOrigins = [
-  'http://localhost:5173', // entorno local
-  'https://utn-ds-25-practicas-e88q.vercel.app' // deploy en Vercel
-];
-
-// Configuración dinámica de CORS
 const corsOptions = {
-  origin: (origin: string | undefined, callback: Function) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.warn(`CORS bloqueado para origen no permitido: ${origin}`);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
