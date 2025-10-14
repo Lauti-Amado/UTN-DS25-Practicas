@@ -11,7 +11,7 @@ import { handleError } from './middlewares/error.middleware';
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
@@ -34,7 +34,3 @@ app.use('/api/seed', seedRoutes);
 
 // Manejo de errores
 app.use(handleError);
-
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});

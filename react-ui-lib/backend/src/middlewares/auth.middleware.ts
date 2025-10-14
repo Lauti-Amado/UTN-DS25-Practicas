@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-// Extender tipo Request
+
 declare global {
-namespace Express {
-interface Request {
-user?: {
-id: number;
-email: string;
-role: 'USER' | 'ADMIN';
-}
-}
-}
+    namespace Express {
+    interface Request {
+        user?: {
+        id: number;
+        email: string;
+        role: 'USER' | 'ADMIN';
+    }
+    }
+    }
 }
 // Autenticación: Middleware para identificar usuarios
 export function authenticate(req: Request, res: Response, next: NextFunction) {
